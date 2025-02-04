@@ -1,0 +1,73 @@
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    Node head;
+
+    // Insert at the beginning
+    public void insertAtBeginning(int val) {
+        Node newNode = new Node(val);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    // Insert at the end
+    public void insertAtEnd(int val) {
+        Node newNode = new Node(val);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        Node temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = newNode;
+    }
+
+    // Delete a node
+    public void deleteNode(int val) {
+        if (head == null) return;
+
+        if (head.data == val) {
+            head = head.next;
+            return;
+        }
+
+        Node temp = head;
+        while (temp.next != null && temp.next.data != val) {
+            temp = temp.next;
+        }
+        if (temp.next == null) return;
+
+        temp.next = temp.next.next;
+    }
+
+    // Print the list
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("NULL");
+    }
+
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        list.insertAtBeginning(10);
+        list.insertAtEnd(20);
+        list.insertAtEnd(30);
+        list.display();
+
+        list.deleteNode(20);
+        list.display();
+    }
+}
