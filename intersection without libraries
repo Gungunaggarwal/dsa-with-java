@@ -1,0 +1,46 @@
+public class SimpleIntersection {
+    public static int[] findIntersection(int[] arr1, int[] arr2) {
+        int maxSize = Math.min(arr1.length, arr2.length);
+        int[] tempResult = new int[maxSize];
+        int k = 0;
+        for (int i = 0; i < arr1.length; i++) {
+            for (int j = 0; j < arr2.length; j++) {
+                if (arr1[i] == arr2[j]) {
+                    boolean alreadyAdded = false;
+                    for (int x = 0; x < k; x++) {
+                        if (tempResult[x] == arr1[i]) {
+                            alreadyAdded = true;
+                            break;
+                        }
+                    }
+                    if (!alreadyAdded) {
+                        tempResult[k++] = arr1[i]; 
+                    }
+                    break; 
+                }
+            }
+        }
+        int[] result = new int[k];
+        for (int x = 0; x < k; x++) {
+            result[x] = tempResult[x];
+        }
+        return result;
+    }
+    public static void printArray(int[] arr) {
+        System.out.print("[");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i < arr.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+    public static void main(String[] args) {
+        int[] arr1 = {1, 2, 3, 4, 2, 5};
+        int[] arr2 = {3, 2, 2, 5, 6};
+        int[] intersection = findIntersection(arr1, arr2);
+        System.out.print("Intersection: ");
+        printArray(intersection); 
+    }
+}
