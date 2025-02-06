@@ -1,0 +1,36 @@
+import java.util.*;
+
+public class ArrayIntersection {
+    public static List<Integer> findIntersection(List<Integer> list1, List<Integer> list2) {
+        List<Integer> result = new ArrayList<>();
+        
+        // Sorting both lists for efficient traversal
+        Collections.sort(list1);
+        Collections.sort(list2);
+        
+        int i = 0, j = 0;
+        
+        while (i < list1.size() && j < list2.size()) {
+            if (list1.get(i).equals(list2.get(j))) {
+                // Avoid duplicates in the result
+                if (result.isEmpty() || !result.get(result.size() - 1).equals(list1.get(i))) {
+                    result.add(list1.get(i));
+                }
+                i++;
+                j++;
+            } else if (list1.get(i) < list2.get(j)) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> list1 = Arrays.asList(1, 2, 2, 3, 4, 5);
+        List<Integer> list2 = Arrays.asList(2, 2, 3, 5, 6);
+        
+        System.out.println(findIntersection(list1, list2)); // Output: [2, 3, 5]
+    }
+}
