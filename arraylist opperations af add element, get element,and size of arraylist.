@@ -1,0 +1,40 @@
+import java.util.ArrayList;
+
+public class SimpleArrayList {
+    private ArrayList<Integer> list;
+    public SimpleArrayList() {
+        list = new ArrayList<>();
+    }
+    public void add(int element) {
+        list.add(element);
+    }
+    public int get(int index) {
+        if (index < 0 || index >= list.size()) {
+            throw new IndexOutOfBoundsException("Index is out of bounds");
+        }
+        return list.get(index);
+    }
+    public int size() {
+        return list.size();
+    }
+    public int removeLastElement() {
+        if (list.isEmpty()) {
+            throw new IllegalStateException("List is empty");
+        }
+        return list.remove(list.size() - 1);
+    }
+    public static void main(String[] args) {
+        SimpleArrayList myList = new SimpleArrayList();
+
+        myList.add(10);
+        myList.add(20);
+        myList.add(30);
+
+        System.out.println("Size of the list: " + myList.size()); 
+        System.out.println("Element at index 1: " + myList.get(1)); 
+
+        int removedElement = myList.removeLastElement();
+        System.out.println("Removed last element: " + removedElement); 
+        System.out.println("Size after removal: " + myList.size()); 
+    }
+}
