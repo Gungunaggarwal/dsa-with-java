@@ -1,0 +1,70 @@
+class FixedSizeQueue {
+    private int[] queue;
+    private int front, rear, size, capacity;
+
+    public FixedSizeQueue(int capacity) {
+        this.capacity = capacity;
+        queue = new int[capacity];
+        front = 0;
+        rear = -1;
+        size = 0;
+    }
+
+    public void enqueue(int item) {
+        if (isFull()) {
+            throw new IllegalStateException("Queue is full");
+        }
+        rear = (rear + 1) % capacity; // Circular increment
+        queue[rear] = item;
+        size++;
+    }
+
+    public int dequeue() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        int item = queue[front];
+        front = (front + 1) % capacity; // Circular increment
+        size--;
+        return item;
+    }
+
+    public int peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        return queue[front];
+    }
+
+    public int rear() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        return queue[rear];
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public boolean isFull() {
+        return size == capacity;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public static void main(String[] args) {
+        FixedSizeQueue queue = new FixedSizeQueue(5);
+        queue.enqueue(10);
+        queue.enqueue(20);
+        queue.enqueue(30);
+        queue.enqueue(40);
+        System.out.println("Front element: " + queue.peek()); 
+        System.out.println("Rear element: " + queue.rear()); 
+        System.out.println("Dequeued: " + queue.dequeue()); 
+        System.out.println("Updated Front element: " + queue.peek()); 
+        System.out.println("Updated Rear element: " + queue.rear());
+    }
+}
